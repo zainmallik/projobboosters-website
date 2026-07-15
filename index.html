@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ProJob Boosters | Reverse Recruiting &amp; End-to-End Job Search Management</title>
+<link rel="icon" type="image/png" href="assets/favicon.ico">
 <meta name="description" content="ProJob Boosters runs your entire job search: recruiter-grade resumes, daily manual applications, transparent tracking, and interview prep, so you focus on interviews, not inboxes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -289,6 +290,57 @@
   @media (prefers-reduced-motion: reduce){
     *{transition:none !important;animation:none !important;}
   }
+  .shot{
+  cursor:pointer;
+  position:relative;
+}
+
+.lightbox-img{
+  cursor:zoom-in;
+}
+
+.lightbox-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.9);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  padding:30px;
+}
+
+.lightbox-overlay.active{
+  display:flex;
+}
+
+.lightbox-inner{
+  max-width:95vw;
+  max-height:95vh;
+  text-align:center;
+}
+
+.lightbox-inner img{
+  max-width:100%;
+  max-height:85vh;
+  border-radius:12px;
+}
+
+.lightbox-caption{
+  color:#fff;
+  margin-top:12px;
+  font-size:14px;
+}
+
+.lightbox-close{
+  position:absolute;
+  top:20px;
+  right:30px;
+  color:#fff;
+  font-size:36px;
+  cursor:pointer;
+  user-select:none;
+}
 </style>
 </head>
 <body>
@@ -456,39 +508,57 @@
     </div>
     <div class="proof-grid">
       <div class="proof-card">
-        <div class="shot"><img src="assets/interview-healthequity.png" alt="HealthEquity interview request email"></div>
+        <div class="shot"><img src="assets/interview-healthequity.png" alt="HealthEquity interview request email" class="lightbox-img"
+        tabindex="0"
+        role="button"></div>
         <div class="proof-meta"><span class="co">HealthEquity</span><span class="kind">Interview</span></div>
       </div>
       <div class="proof-card">
-        <div class="shot"><img src="assets/interview-oncolens.png" alt="OncoLens interview request email"></div>
+        <div class="shot"><img src="assets/interview-oncolens.png" alt="OncoLens interview request email" class="lightbox-img"
+        tabindex="0"
+        role="button"></div>
         <div class="proof-meta"><span class="co">OncoLens</span><span class="kind">Interview</span></div>
       </div>
       <div class="proof-card">
-        <div class="shot"><img src="assets/interview-maximus.png" alt="Maximus interview screening email"></div>
+        <div class="shot"><img src="assets/interview-maximus.png" alt="Maximus interview screening email" class="lightbox-img"
+        tabindex="0"
+        role="button"></div>
         <div class="proof-meta"><span class="co">Maximus</span><span class="kind">Screening</span></div>
       </div>
       <div class="proof-card">
-        <div class="shot"><img src="assets/interview-usi.png" alt="USI Insurance Services interview email"></div>
+        <div class="shot"><img src="assets/interview-usi.png" alt="USI Insurance Services interview email" class="lightbox-img"
+        tabindex="0"
+        role="button"></div>
         <div class="proof-meta"><span class="co">USI Insurance</span><span class="kind">Interview</span></div>
       </div>
       <div class="proof-card">
-        <div class="shot"><img src="assets/interview-officeally.png" alt="Office Ally recruiter screen email"></div>
+        <div class="shot"><img src="assets/interview-officeally.png" alt="Office Ally recruiter screen email" class="lightbox-img"
+        tabindex="0"
+        role="button"></div>
         <div class="proof-meta"><span class="co">Office Ally</span><span class="kind">Recruiter Screen</span></div>
       </div>
       <div class="proof-card">
-        <div class="shot"><img src="assets/interview-zipzap.png" alt="Zip Zap IT Solutions interview invitation"></div>
+        <div class="shot"><img src="assets/interview-zipzap.png" alt="Zip Zap IT Solutions interview invitation" class="lightbox-img"
+        tabindex="0"
+        role="button"></div>
         <div class="proof-meta"><span class="co">Zip Zap IT Solutions</span><span class="kind">Interview</span></div>
       </div>
       <div class="proof-card">
-        <div class="shot"><img src="assets/interview-ubc.png" alt="UBC application follow up email"></div>
+        <div class="shot"><img src="assets/interview-ubc.png" alt="UBC application follow up email" class="lightbox-img"
+        tabindex="0"
+        role="button"></div>
         <div class="proof-meta"><span class="co">UBC</span><span class="kind">Follow-Up</span></div>
       </div>
       <div class="proof-card">
-        <div class="shot"><img src="assets/interview-altru.png" alt="Altru interview confirmation email"></div>
+        <div class="shot"><img src="assets/interview-altru.png" alt="Altru interview confirmation email" class="lightbox-img"
+        tabindex="0"
+        role="button"></div>
         <div class="proof-meta"><span class="co">Altru</span><span class="kind">Interview Confirmed</span></div>
       </div>
       <div class="proof-card wide">
-        <div class="shot"><img src="assets/offer-letter.png" alt="Signed offer of employment letter"></div>
+        <div class="shot"><img src="assets/offer-letter.png" alt="Signed offer of employment letter" class="lightbox-img"
+        tabindex="0"
+        role="button"></div>
         <div class="proof-meta"><span class="co">Offer of Employment (Signed)</span><span class="kind">Offer</span></div>
       </div>
     </div>
@@ -646,6 +716,54 @@
     </div>
   </div>
 </footer>
+<!-- Lightbox -->
+<div class="lightbox-overlay" id="lightbox">
+  <span class="lightbox-close">&times;</span>
+
+  <div class="lightbox-inner">
+    <img id="lightboxImage" src="" alt="">
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+</div>
+
+<script>
+const lightbox = document.getElementById("lightbox");
+const lightboxImage = document.getElementById("lightboxImage");
+const lightboxCaption = document.getElementById("lightboxCaption");
+
+document.querySelectorAll(".lightbox-img").forEach(img => {
+
+  img.addEventListener("click", () => {
+    lightboxImage.src = img.src;
+    lightboxImage.alt = img.alt;
+    lightboxCaption.textContent = img.alt;
+    lightbox.classList.add("active");
+  });
+
+  img.addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+      img.click();
+    }
+  });
+
+});
+
+document.querySelector(".lightbox-close").addEventListener("click", () => {
+  lightbox.classList.remove("active");
+});
+
+lightbox.addEventListener("click", e => {
+  if (e.target === lightbox) {
+    lightbox.classList.remove("active");
+  }
+});
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") {
+    lightbox.classList.remove("active");
+  }
+});
+</script>
 
 </body>
 </html>
