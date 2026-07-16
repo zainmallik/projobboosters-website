@@ -672,13 +672,33 @@
       <p>We'll reply within one business day with next steps, or grab time directly on the calendar.</p>
     </div>
     <div class="contact-grid">
-      <form onsubmit="event.preventDefault(); alert('Thanks! This is a design preview, connect a form handler to go live.');">
-        <div class="field"><label>Full name</label><input type="text" required placeholder="Jane Doe"></div>
-        <div class="field"><label>Email</label><input type="email" required placeholder="jane@email.com"></div>
-        <div class="field"><label>Target role</label><input type="text" placeholder="e.g. Senior DevOps Engineer"></div>
-        <div class="field"><label>What's slowing your search down?</label><textarea rows="4" placeholder="Tell us where things stand today..."></textarea></div>
-        <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center;">Send message</button>
-      </form>
+    <form name="book-call" method="POST" data-netlify="true">
+  <input type="hidden" name="form-name" value="book-call">
+
+  <div class="field">
+    <label>Full name</label>
+    <input type="text" name="full-name" required placeholder="Jane Doe">
+  </div>
+
+  <div class="field">
+    <label>Email</label>
+    <input type="email" name="email" required placeholder="jane@email.com">
+  </div>
+
+  <div class="field">
+    <label>Target role</label>
+    <input type="text" name="target-role" placeholder="e.g. Senior DevOps Engineer">
+  </div>
+
+  <div class="field">
+    <label>What's slowing your search down?</label>
+    <textarea name="message" rows="4" placeholder="Tell us where things stand today..."></textarea>
+  </div>
+
+  <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center;">
+    Send message
+  </button>
+</form>
       <div class="contact-side">
         <div class="ch"><span class="ic">◧</span><div><strong>Book a call</strong><br><span style="color:var(--slate)">Grab a slot on our Calendly, no back-and-forth needed.</span></div></div>
         <div class="ch"><a href="https://wa.me/923295378533" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;width:100%;"><span class="ic">◫</span><div><strong>WhatsApp</strong><br><span style="color:var(--slate)">+92 329 5378533, message us for a same-day reply.</span></div></a></div>
